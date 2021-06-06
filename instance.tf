@@ -29,8 +29,7 @@ resource "google_compute_instance" "docker" {
   }
 
   network_interface {
-    network    = "default"
-    subnetwork = "default"
+    network = "default"
     access_config {}
   }
 

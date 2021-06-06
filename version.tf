@@ -27,7 +27,7 @@ terraform {
     }
   }
 
-    backend "remote" {
+  backend "remote" {
     organization = "sigmoid-devops"
 
     workspaces {

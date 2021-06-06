@@ -4,6 +4,7 @@ resource "google_service_account" "computebucketadmin" {
   display_name = "SA for compute and GCS buckets full access and GKE in"
 }
 
+
 resource "google_compute_instance" "docker" {
   project      = "vernal-dispatch-281311"
   name         = "dockermachine"

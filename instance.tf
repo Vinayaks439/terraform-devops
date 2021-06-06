@@ -1,18 +1,18 @@
 resource "google_service_account" "computebucketadmin" {
-  project =   var.project
+  project      = var.project
   account_id   = "computebucketadmin"
-  display_name = "SA for compute and GCS buckets full access and GKE in "
+  display_name = "SA for compute and GCS buckets full access and GKE in"
 }
 
 resource "google_compute_instance" "docker" {
-  project      =  var.project
+  project      = var.project
   name         = "dockermachine"
   machine_type = "n1-standard-2"
   zone         = "us-central1-a"
 
   labels = {
 
-    group = "terraform"
+    group   = "terraform"
     process = "docker"
 
   }
@@ -22,13 +22,13 @@ resource "google_compute_instance" "docker" {
   boot_disk {
     initialize_params {
       image = "ubuntu-os-cloud/ubuntu-1804-lts"
-      size = "150"
-      type = "pd-standard"
+      size  = "150"
+      type  = "pd-standard"
     }
   }
 
   network_interface {
-    network = "default"
+    network    = "default"
     subnetwork = "default"
     access_config {}
   }
@@ -38,7 +38,7 @@ resource "google_compute_instance" "docker" {
 
   service_account {
 
-    email = google_service_account.computebucketadmin.email
+    email  = google_service_account.computebucketadmin.email
     scopes = ["https://www.googleapis.com/auth/cloud-platform"]
   }
 

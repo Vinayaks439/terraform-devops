@@ -1,11 +1,11 @@
 resource "google_service_account" "computebucketadmin" {
-  project      = var.project
+  project      = "vernal-dispatch-281311"
   account_id   = "computebucketadmin"
   display_name = "SA for compute and GCS buckets full access and GKE in"
 }
 
 resource "google_compute_instance" "docker" {
-  project      = var.project
+  project      = "vernal-dispatch-281311"
   name         = "dockermachine"
   machine_type = "n1-standard-2"
   zone         = "us-central1-a"

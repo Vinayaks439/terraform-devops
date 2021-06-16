@@ -41,7 +41,7 @@ resource "google_compute_instance" "docker" {
 
 }
 
-resource "google_compute_instance" "docker" {
+resource "google_compute_instance" "docker1" {
   project      =  "${data.google_project.self.project_id}"
   name         = "dockermachine1"
   machine_type = "n1-standard-2"

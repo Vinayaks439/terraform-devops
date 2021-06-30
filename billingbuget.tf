@@ -6,12 +6,27 @@ data "google_project" "project" {
 
 }
 
+resource "google_project_iam_member" "billingadmin" {
+
+  project = data.google_project.self.project_id
+  role = "roles/billing.admin"
+  member = "vinayak@vernal-dispatch-281311.iam.gserviceaccount.com"
+
+}
+
+resource "google_project_iam_member" "pubsubadmin" {
+    project = data.google_project.project.project_id
+    role = "roles/pubsub.admin"
+    member = "vinayak@vernal-dispatch-281311.iam.gserviceaccount.com"
+}
+
 resource "google_pubsub_topic" "budgettopic" {
     name = "budget-topic"
 
     labels = {
         budget = "test"
     }
+    depends_on = [google_project_iam_member.pubsubadmin]
 }
 
 data "google_pubsub_topic" "mytopic" {
@@ -42,5 +57,5 @@ resource "google_billing_budget" "mybudget" {
 
         pubsub_topic = "projects/${data.google_project.project.id}/topics/${data.google_pubsub_topic.mytopic.id}"
     }
-    depends_on = [google_pubsub_topic.budgettopic]
+    depends_on = [google_pubsub_topic.budgettopic , google_project_iam_member.billingadmin]
 }

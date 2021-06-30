@@ -1,7 +1,3 @@
-data "google_billing_account" "account" {
-    billing_account = "012191-023296-B237DE"
-}
-
 data "google_project" "project" {
 
 }
@@ -31,6 +27,10 @@ resource "google_pubsub_topic" "budgettopic" {
 
 data "google_pubsub_topic" "mytopic" {
     name = "budget-topic"
+}
+
+data "google_billing_account" "account" {
+    billing_account = "012191-023296-B237DE"
 }
 
 resource "google_billing_budget" "mybudget" {
